@@ -1,51 +1,1227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        /* Add your CSS styles here */
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Investing Simulator</title>
+
+<style>
+
+body{
+    background:#111;
+    color:white;
+    font-family:Arial,sans-serif;
+    margin:0;
+    padding:10px;
+}
+
+.box{
+    border:1px solid #444;
+    padding:10px;
+    margin-bottom:10px;
+}
+
+button{
+    padding:8px;
+    margin:4px;
+}
+
+select{
+    padding:8px;
+}
+
+h1,h2,h3{
+    margin-top:0;
+}
+
+.green{
+    color:lightgreen;
+}
+
+.red{
+    color:tomato;
+}
+
+.gold{
+    color:gold;
+}
+
+.small{
+    font-size:12px;
+}
+
+#news{
+    height:150px;
+    overflow-y:auto;
+}
+
+</style>
 </head>
+
 <body>
-    <!-- Add your content here -->
-    <header>
-        <h1>Welcome to My Website</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <section id="home">
-            <h2>About Us</h2>
-            <p>This is the home section of the website.</p>
-        </section>
+<h1>📈 Investing Simulator</h1>
 
-        <section id="about">
-            <h2>About Us</h2>
-            <p>This is the about section of the website.</p>
-        </section>
+<div class="box">
 
-        <section id="services">
-            <h2>Our Services</h2>
-            <p>This is the services section of the website.</p>
-        </section>
+<h2>Portfolio</h2>
 
-        <section id="contact">
-            <h2>Contact Us</h2>
-            <p>This is the contact section of the website.</p>
-        </section>
-    </main>
+<p>
+Day:
+<span id="day">1</span>
+</p>
 
-    <footer>
-        <p>Copyright &copy; 2023 My Website. All rights reserved.</p>
-    </footer>
+<p>
+Cash:
+₹<span id="cash">500</span>
+</p>
+
+<p>
+Net Worth:
+₹<span id="netWorth">500</span>
+</p>
+
+<p>
+Risk Score:
+<span id="riskScore">0</span>/100
+</p>
+
+</div>
+
+<div class="box">
+
+<h2>Goals</h2>
+
+<ul>
+
+<li id="goal1">
+Reach ₹10,000 Net Worth
+</li>
+
+<li id="goal2">
+Survive 365 Days
+</li>
+
+<li id="goal3">
+Beat Market Index
+</li>
+
+</ul>
+
+</div>
+
+<div class="box">
+
+<h2>Assets</h2>
+
+<select id="assetSelect">
+
+<option value="tech">
+Technology Stocks
+</option>
+
+<option value="gold">
+Gold
+</option>
+
+<option value="crypto">
+Crypto Index
+</option>
+
+<option value="index">
+Index Fund
+</option>
+
+</select>
+
+<p id="assetDescription">
+
+Choose an asset.
+
+</p>
+
+<p>
+
+Price:
+₹<span id="assetPrice">0</span>
+
+</p>
+
+<p>
+
+Owned:
+<span id="assetOwned">0</span>
+
+</p>
+
+<button onclick="buyAsset()">
+
+Buy 1 Unit
+
+</button>
+
+<button onclick="sellAsset()">
+
+Sell 1 Unit
+
+</button>
+
+</div>
+
+<div class="box">
+
+<h2>Portfolio Allocation</h2>
+
+<p>
+Tech:
+<span id="allocTech">0</span>%
+</p>
+
+<p>
+Gold:
+<span id="allocGold">0</span>%
+</p>
+
+<p>
+Crypto:
+<span id="allocCrypto">0</span>%
+</p>
+
+<p>
+Index:
+<span id="allocIndex">0</span>%
+</p>
+
+</div>
+
+<div class="box">
+
+<h2>Statistics</h2>
+
+<p>
+Total Trades:
+<span id="totalTrades">0</span>
+</p>
+
+<p>
+Best Asset:
+<span id="bestAsset">
+None
+</span>
+</p>
+
+<p>
+Worst Asset:
+<span id="worstAsset">
+None
+</span>
+</p>
+
+<p>
+Salary Received:
+₹<span id="salaryEarned">
+0
+</span>
+</p>
+
+<p>
+Dividends Earned:
+₹<span id="dividendsEarned">
+0
+</span>
+</p>
+
+<p>
+Emergency Expenses:
+₹<span id="expensesPaid">
+0
+</span>
+</p>
+
+</div>
+
+<div class="box">
+
+<h2>🐐 Goat Counter</h2>
+
+<p>
+
+Goats Owned:
+
+<span id="goatCount">
+
+20
+
+</span>
+
+</p>
+
+<button onclick="addGoat()">
+
++1 Goat
+
+</button>
+
+<button onclick="sellGoat()">
+
+Sell Goat For ₹25
+
+</button>
+
+</div>
+
+<div class="box">
+
+<h2>Market News</h2>
+
+<div id="news">
+
+<p>
+Simulator Started...
+</p>
+
+</div>
+
+</div>
+
+<div class="box">
+
+<h2>Achievements</h2>
+
+<ul id="achievements">
+
+<li>
+No achievements yet.
+</li>
+
+</ul>
+
+</div>
+
+<script>
+    // ==========================================
+// CORE GAME VARIABLES
+// ==========================================
+
+let day = 1;
+
+let cash = 500;
+
+let inflationRate = 0.0003;
+
+let marketIndex = 100;
+
+let totalTrades = 0;
+
+let salaryEarned = 0;
+
+let dividendsEarned = 0;
+
+let expensesPaid = 0;
+
+let goatCount =
+Number(localStorage.getItem("goatCount"))
+|| 20;
+
+document.getElementById("goatCount").innerText =
+goatCount;
+
+// ==========================================
+// ASSET DATABASE
+// ==========================================
+
+const assets = {
+
+tech:{
+    name:"Technology Stocks",
+    price:100,
+    startPrice:100,
+    owned:0,
+    drift:0.0010,
+    volatility:0.03,
+    description:
+    "High growth companies with moderate risk."
+},
+
+gold:{
+    name:"Gold",
+    price:200,
+    startPrice:200,
+    owned:0,
+    drift:0.0002,
+    volatility:0.007,
+    description:
+    "Defensive asset used during uncertainty."
+},
+
+crypto:{
+    name:"Crypto Index",
+    price:50,
+    startPrice:50,
+    owned:0,
+    drift:0.0012,
+    volatility:0.08,
+    description:
+    "Very high risk and very high volatility."
+},
+
+index:{
+    name:"Index Fund",
+    price:120,
+    startPrice:120,
+    owned:0,
+    drift:0.0007,
+    volatility:0.015,
+    description:
+    "Diversified market fund."
+}
+
+};
+
+// ==========================================
+// NEWS SYSTEM
+// ==========================================
+
+function addNews(message){
+
+const news =
+document.getElementById("news");
+
+const p =
+document.createElement("p");
+
+p.innerText =
+"[Day " + day + "] " + message;
+
+news.prepend(p);
+
+while(news.children.length > 50){
+
+news.removeChild(
+news.lastChild
+);
+
+}
+
+}
+
+// ==========================================
+// GOAT FUNCTIONS
+// ==========================================
+
+function addGoat(){
+
+goatCount++;
+
+localStorage.setItem(
+"goatCount",
+goatCount
+);
+
+document.getElementById(
+"goatCount"
+).innerText = goatCount;
+
+addNews(
+"🐐 New goat acquired."
+);
+
+}
+
+function sellGoat(){
+
+if(goatCount <= 0){
+
+addNews(
+"No goats available."
+);
+
+return;
+
+}
+
+goatCount--;
+
+cash += 25;
+
+localStorage.setItem(
+"goatCount",
+goatCount
+);
+
+document.getElementById(
+"goatCount"
+).innerText = goatCount;
+
+addNews(
+"🐐 Goat sold for ₹25."
+);
+
+updatePortfolio();
+
+}
+
+// ==========================================
+// ASSET DISPLAY
+// ==========================================
+
+function updateSelectedAsset(){
+
+const key =
+document.getElementById(
+"assetSelect"
+).value;
+
+const asset =
+assets[key];
+
+document.getElementById(
+"assetDescription"
+).innerText =
+asset.description;
+
+document.getElementById(
+"assetPrice"
+).innerText =
+asset.price.toFixed(2);
+
+document.getElementById(
+"assetOwned"
+).innerText =
+asset.owned;
+
+}
+
+document
+.getElementById(
+"assetSelect"
+)
+.addEventListener(
+"change",
+updateSelectedAsset
+);
+
+// ==========================================
+// BUY SYSTEM
+// ==========================================
+
+function buyAsset(){
+
+const key =
+document.getElementById(
+"assetSelect"
+).value;
+
+const asset =
+assets[key];
+
+if(cash < asset.price){
+
+addNews(
+"Insufficient cash."
+);
+
+return;
+
+}
+
+cash -= asset.price;
+
+asset.owned++;
+
+totalTrades++;
+
+addNews(
+"Bought 1 " +
+asset.name
+);
+
+updatePortfolio();
+
+updateSelectedAsset();
+
+}
+
+// ==========================================
+// SELL SYSTEM
+// ==========================================
+
+function sellAsset(){
+
+const key =
+document.getElementById(
+"assetSelect"
+).value;
+
+const asset =
+assets[key];
+
+if(asset.owned <= 0){
+
+addNews(
+"No units owned."
+);
+
+return;
+
+}
+
+asset.owned--;
+
+cash += asset.price;
+
+totalTrades++;
+
+addNews(
+"Sold 1 " +
+asset.name
+);
+
+updatePortfolio();
+
+updateSelectedAsset();
+
+}
+
+// ==========================================
+// NET WORTH
+// ==========================================
+
+function calculateNetWorth(){
+
+let total =
+cash;
+
+for(
+const key in assets
+){
+
+total +=
+assets[key].owned *
+assets[key].price;
+
+}
+
+return total;
+
+}
+
+// ==========================================
+// PORTFOLIO ALLOCATION
+// ==========================================
+
+function updateAllocation(){
+
+const worth =
+calculateNetWorth();
+
+function percent(value){
+
+if(worth <= 0)
+return 0;
+
+return (
+value /
+worth *
+100
+).toFixed(1);
+
+}
+
+document.getElementById(
+"allocTech"
+).innerText =
+percent(
+assets.tech.price *
+assets.tech.owned
+);
+
+document.getElementById(
+"allocGold"
+).innerText =
+percent(
+assets.gold.price *
+assets.gold.owned
+);
+
+document.getElementById(
+"allocCrypto"
+).innerText =
+percent(
+assets.crypto.price *
+assets.crypto.owned
+);
+
+document.getElementById(
+"allocIndex"
+).innerText =
+percent(
+assets.index.price *
+assets.index.owned
+);
+
+}
+
+// ==========================================
+// RISK SCORE
+// ==========================================
+
+function calculateRisk(){
+
+let score = 0;
+
+score +=
+assets.tech.owned * 4;
+
+score +=
+assets.gold.owned * 1;
+
+score +=
+assets.crypto.owned * 10;
+
+score +=
+assets.index.owned * 3;
+
+if(score > 100){
+
+score = 100;
+
+}
+
+document.getElementById(
+"riskScore"
+).innerText =
+score;
+
+}
+
+// ==========================================
+// PORTFOLIO UPDATE
+// ==========================================
+
+function updatePortfolio(){
+
+document.getElementById(
+"cash"
+).innerText =
+cash.toFixed(2);
+
+document.getElementById(
+"netWorth"
+).innerText =
+calculateNetWorth()
+.toFixed(2);
+
+document.getElementById(
+"day"
+).innerText =
+day;
+
+document.getElementById(
+"totalTrades"
+).innerText =
+totalTrades;
+
+document.getElementById(
+"salaryEarned"
+).innerText =
+salaryEarned
+.toFixed(2);
+
+document.getElementById(
+"dividendsEarned"
+).innerText =
+dividendsEarned
+.toFixed(2);
+
+document.getElementById(
+"expensesPaid"
+).innerText =
+expensesPaid
+.toFixed(2);
+
+updateAllocation();
+
+calculateRisk();
+
+}
+
+updateSelectedAsset();
+
+updatePortfolio();
+
+// ==========================================
+// PART 2 ENDS HERE
+// =========================================
+// ==========================================
+// ACHIEVEMENTS
+// ==========================================
+
+let achievements = [];
+
+function unlockAchievement(name){
+
+if(
+achievements.includes(name)
+){
+
+return;
+
+}
+
+achievements.push(name);
+
+const list =
+document.getElementById(
+"achievements"
+);
+
+const item =
+document.createElement("li");
+
+item.innerText =
+"🏆 " + name;
+
+list.appendChild(item);
+
+addNews(
+"Achievement Unlocked: " +
+name
+);
+
+}
+
+// ==========================================
+// VISITOR COUNTER
+// ==========================================
+
+// NOTE:
+//
+// This counts visits on THIS DEVICE ONLY.
+//
+// GitHub Pages cannot store
+// global visitors without a backend.
+//
+// Later you can replace this
+// with GoatCounter or another
+// analytics service.
+
+let visitors =
+Number(
+localStorage.getItem(
+"visitorCount"
+)
+) || 0;
+
+visitors++;
+
+localStorage.setItem(
+"visitorCount",
+visitors
+);
+
+const visitorBox =
+document.createElement("div");
+
+visitorBox.className = "box";
+
+visitorBox.innerHTML =
+`
+<h2>Visitor Counter</h2>
+<p>
+Visits:
+<span id="visitorCount">
+${visitors}
+</span>
+</p>
+`;
+
+document.body.insertBefore(
+visitorBox,
+document.body.children[1]
+);
+
+// ==========================================
+// DIVIDENDS
+// ==========================================
+
+function payDividends(){
+
+let dividend = 0;
+
+dividend +=
+assets.tech.owned * 0.50;
+
+dividend +=
+assets.index.owned * 0.30;
+
+cash += dividend;
+
+dividendsEarned += dividend;
+
+if(dividend > 0){
+
+addNews(
+"₹" +
+dividend.toFixed(2) +
+" dividends received."
+);
+
+}
+
+}
+
+// ==========================================
+// SALARY
+// ==========================================
+
+function paySalary(){
+
+cash += 50;
+
+salaryEarned += 50;
+
+addNews(
+"Salary received: ₹50"
+);
+
+}
+
+// ==========================================
+// EMERGENCY EXPENSES
+// ==========================================
+
+function randomExpense(){
+
+const cost =
+Math.floor(
+Math.random() * 100
+) + 20;
+
+cash -= cost;
+
+expensesPaid += cost;
+
+addNews(
+"Emergency expense: ₹" +
+cost
+);
+
+}
+
+// ==========================================
+// MARKET EVENTS
+// ==========================================
+
+function marketCrash(){
+
+assets.tech.price *= 0.80;
+
+assets.crypto.price *= 0.60;
+
+assets.gold.price *= 1.05;
+
+assets.index.price *= 0.88;
+
+addNews(
+"📉 Market Crash!"
+);
+
+}
+
+function bullMarket(){
+
+assets.tech.price *= 1.12;
+
+assets.crypto.price *= 1.25;
+
+assets.gold.price *= 0.98;
+
+assets.index.price *= 1.08;
+
+addNews(
+"🚀 Bull Market!"
+);
+
+}
+
+// ==========================================
+// PRICE ENGINE
+// ==========================================
+
+function updatePrices(){
+
+for(
+const key in assets
+){
+
+const asset =
+assets[key];
+
+const move =
+(
+Math.random() * 2 - 1
+) * asset.volatility;
+
+asset.price =
+asset.price *
+(
+1 +
+asset.drift +
+move
+);
+
+if(
+asset.price < 1
+){
+
+asset.price = 1;
+
+}
+
+}
+
+}
+
+// ==========================================
+// BEST & WORST ASSET
+// ==========================================
+
+function updatePerformance(){
+
+let best =
+null;
+
+let worst =
+null;
+
+let bestValue =
+-999999;
+
+let worstValue =
+999999;
+
+for(
+const key in assets
+){
+
+const asset =
+assets[key];
+
+const performance =
+(
+asset.price /
+asset.startPrice
+) * 100;
+
+if(
+performance >
+bestValue
+){
+
+bestValue =
+performance;
+
+best =
+asset.name;
+
+}
+
+if(
+performance <
+worstValue
+){
+
+worstValue =
+performance;
+
+worst =
+asset.name;
+
+}
+
+}
+
+document.getElementById(
+"bestAsset"
+).innerText =
+best;
+
+document.getElementById(
+"worstAsset"
+).innerText =
+worst;
+
+}
+
+// ==========================================
+// GOALS
+// ==========================================
+
+function checkGoals(){
+
+const worth =
+calculateNetWorth();
+
+if(
+worth >= 10000
+){
+
+unlockAchievement(
+"Reached ₹10,000 Net Worth"
+);
+
+}
+
+if(
+day >= 365
+){
+
+unlockAchievement(
+"Survived One Year"
+);
+
+}
+
+if(
+goatCount >= 50
+){
+
+unlockAchievement(
+"Goat Empire"
+);
+
+}
+
+if(
+totalTrades >= 100
+){
+
+unlockAchievement(
+"Active Trader"
+);
+
+}
+
+if(
+cash >= 5000
+){
+
+unlockAchievement(
+"Cash Hoarder"
+);
+
+}
+
+}
+
+// ==========================================
+// INFLATION
+// ==========================================
+
+function applyInflation(){
+
+cash =
+cash *
+(
+1 - inflationRate
+);
+
+}
+
+// ==========================================
+// GAME LOOP
+// ==========================================
+
+setInterval(function(){
+
+day++;
+
+marketIndex +=
+(
+Math.random() * 2 - 1
+);
+
+updatePrices();
+
+if(
+Math.random() < 0.02
+){
+
+marketCrash();
+
+}
+
+if(
+Math.random() < 0.02
+){
+
+bullMarket();
+
+}
+
+if(
+day % 30 === 0
+){
+
+paySalary();
+
+}
+
+if(
+day % 60 === 0
+){
+
+payDividends();
+
+}
+
+if(
+Math.random() < 0.03
+){
+
+randomExpense();
+
+}
+
+applyInflation();
+
+updatePerformance();
+
+checkGoals();
+
+updatePortfolio();
+
+updateSelectedAsset();
+
+},1000);
+
+// ==========================================
+// STARTUP
+// ==========================================
+
+addNews(
+"Simulator Loaded."
+);
+
+addNews(
+"Starting Cash: ₹500"
+);
+
+addNews(
+"Starting Goats: 20"
+);
+
+updatePortfolio();
+
+updateSelectedAsset();
+
+// ==========================================
+// CLOSE SCRIPT + HTML
+// ==========================================
+
+</script>
+
 </body>
 </html>
